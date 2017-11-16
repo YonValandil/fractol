@@ -59,15 +59,17 @@ void set_env(t_env *env)
 {
     env->win.l = WIDTH;
     env->win.h = HEIGHT;
-    env->win.title = ft_strdup("mlx 42 FdF");
+    env->win.title = ft_strdup("mlx 42 Fract-ol");
     env->img.l = WIDTH_IMG;
     env->img.h = HEIGHT_IMG;
-	env->map = NULL;
-	env->nbr_line = 0;
-	env->nbr_col = 0;
-	env->height = 5;
-	env->scalex = 30;
-	env->scaley = 15;
-	env->posx = (WIDTH_IMG / 2) + 125;
-	env->posy = 100;
+	env->fract.x1 = -2.1;
+	env->fract.x2 = 0.6;
+	env->fract.y1 = -1.2;
+	env->fract.y2 = 1.2;
+	env->fract.zoom = 100;
+	env->fract.i_max = 50;
+	env->fract.c_r = 0;
+	env->fract.c_i = 0;
+	env->fract.z_r = 0;
+	env->fract.z_i = 0;
 }

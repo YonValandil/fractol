@@ -4,8 +4,10 @@
 # include </usr/local/include/mlx.h>
 # include "libft.h"
 # include <math.h>
+# include <stdio.h> //
 
 # define BLANK			0x00FFFFFF
+# define BLACK			0x00000000
 # define BLUE			0x000000FF
 # define GREEN			0x0000FF00
 # define RED			0x00FF0000
@@ -28,49 +30,58 @@
 #  define RESET			49
 # endif
 
-typedef struct		s_coords
+typedef struct			s_coords
 {
-	int				x;
-	int				y;
-	unsigned int	color;
-}					t_coords;
+	int					x;
+	int					y;
+	unsigned int		color;
+}						t_coords;
 
-typedef struct		s_img
+typedef struct			s_fractal
 {
-	int				l;
-	int				h;
-	int				bpp;
-	int				size_line;
-	int				endian;
-	void			*ptr;
-	char			*data;
-}                   t_img;
+	int					nbr;
+	float				x1;
+	float				x2;
+	float				y1;
+	float				y2;
+	float				c_r;
+	float				c_i;
+	float				z_r;
+	float				z_i;
+	int					zoom;
+	int					i_max;
+}						t_fractal;
 
-typedef struct		s_win
+typedef struct			s_img
 {
-    int             l;
-    int             h;
-	void			*ptr;
-	char			*title;
-}                   t_win;
+	int					l;
+	int					h;
+	int					bpp;
+	int					size_line;
+	int					endian;
+	void				*ptr;
+	char				*data;
+}           	        t_img;
 
-typedef struct		s_env
+typedef struct			s_win
 {
-	void			*mlx;
-	size_t			nbr_line;
-	size_t			nbr_col;
-	int				height;
-	int				scalex;
-	int				scaley;
-	int				posx;
-	int				posy;
-	struct s_img	img;
-    struct s_win	win;
-}                   t_env;
+    int         	    l;
+    int         	    h;
+	void				*ptr;
+	char				*title;
+}						t_win;
+
+typedef struct			s_env
+{
+	void				*mlx;
+	struct s_img		img;
+    struct s_win		win;
+	struct s_fractal	fract;
+}                   	t_env;
 
 void 		exit_error(const char *s);
 void		set_env(t_env *env);
-void 		set_img(t_env *env);;
+void 		set_img(t_env *env);
 void 		set_string(t_env *env);
 void		fractol(t_env *env);
 void		put_pixel_img(t_env *env, t_coords p);
