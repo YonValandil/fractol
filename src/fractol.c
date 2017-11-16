@@ -14,10 +14,8 @@ void         fractol(t_env *env)
 	float	img_x;
 	float 	img_y;
 
-	// img_x = (env->fract.x2 - env->fract.x1) * env->fract.zoom;
-	img_x = env->fract.x2 - env->fract.x1 * env->fract.zoom;
-	// img_y = (env->fract.y2 - env->fract.y1) * env->fract.zoom;
-	img_y = env->fract.y2 - env->fract.y1 * env->fract.zoom;
+	img_x = (env->fract.x2 - env->fract.x1) * env->fract.zoom;
+	img_y = (env->fract.y2 - env->fract.y1) * env->fract.zoom;
 	i = -1;
 	while(++i < img_x)
 	{
