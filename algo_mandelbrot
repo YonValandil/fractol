@@ -30,3 +30,56 @@ Pour x = 0 tant que x < image_x par pas de 1
         finSi
     finPour
 finPour
+
+--------------------------------------------------------
+
+  VARIABLES
+     x EST_DU_TYPE NOMBRE = x
+     y EST_DU_TYPE NOMBRE = y
+     ReZ EST_DU_TYPE NOMBRE = z_r
+     ImZ EST_DU_TYPE NOMBRE = z_i
+     Re EST_DU_TYPE NOMBRE = c_r
+     Im EST_DU_TYPE NOMBRE = c_i
+     xmin EST_DU_TYPE NOMBRE = x1
+     xmax EST_DU_TYPE NOMBRE = x2
+    ymin EST_DU_TYPE NOMBRE = y1
+    ymax EST_DU_TYPE NOMBRE = y2
+    i EST_DU_TYPE NOMBRE = i
+    j EST_DU_TYPE NOMBRE = j
+    n EST_DU_TYPE NOMBRE = n
+    profondeur EST_DU_TYPE NOMBRE = deep
+  DEBUT_ALGORITHME
+    profondeur PREND_LA_VALEUR 30
+    xmin PREND_LA_VALEUR -1.5
+    xmax PREND_LA_VALEUR 0.5
+    ymin PREND_LA_VALEUR -1
+    ymax PREND_LA_VALEUR ymin+xmax-xmin
+    x PREND_LA_VALEUR xmin
+    POUR i ALLANT_DE 0 A 450
+      DEBUT_POUR
+      x PREND_LA_VALEUR xmin+(xmax-xmin)*i/450
+      POUR j ALLANT_DE 0 A 450
+        DEBUT_POUR
+        y PREND_LA_VALEUR ymin+(ymax-ymin)*j/450
+        ReZ PREND_LA_VALEUR 0
+        ImZ PREND_LA_VALEUR 0
+        n PREND_LA_VALEUR 0
+        TANT_QUE (n<profondeur ET ReZ*ReZ+ImZ*ImZ<4) FAIRE
+          DEBUT_TANT_QUE
+          Re PREND_LA_VALEUR ReZ
+          Im PREND_LA_VALEUR ImZ
+          ReZ PREND_LA_VALEUR Re*Re-Im*Im+x
+          ImZ PREND_LA_VALEUR 2*Re*Im+y
+          n PREND_LA_VALEUR n+1
+          FIN_TANT_QUE
+        SI (n==profondeur) ALORS
+          DEBUT_SI
+          TRACER_POINT (i,j)
+          FIN_SI
+          SINON
+            DEBUT_SINON
+            TRACER_POINT (i,j)
+            FIN_SINON
+        FIN_POUR
+      FIN_POUR
+  FIN_ALGORITHME

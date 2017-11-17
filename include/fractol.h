@@ -49,7 +49,7 @@ typedef struct			s_fractal
 	float				z_r;
 	float				z_i;
 	int					zoom;
-	int					i_max;
+	int					deep;
 }						t_fractal;
 
 typedef struct			s_img
