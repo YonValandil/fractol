@@ -1,43 +1,80 @@
 #include "fractol.h"
 
-int 		set_color(t_env *env, int i)
+int 	set_color(t_env *env, int i)
 {
-	return ((i * 255 / env->fract.deep));
+	return ((i * 255 / env->fra.deep));
 }
 
-void 			fractol(t_env *env)
+void 	fractol(t_env *env)
 {
-	unsigned int	img_x;
-	unsigned int	img_y;
-	unsigned int	x;
-	unsigned int	y;
 	double			i;
 	double			tmp;
 
-	img_x = (env->fract.x2 - env->fract.x1) * env->fract.zoom;
-	img_y = (env->fract.y2 - env->fract.y1) * env->fract.zoom;
-
-	x = -1;
-	while (++x < img_x)
+	env->fra.x = -1;
+	while (++env->fra.x < env->fra.img_x)
 	{
-		y = -1;
-		while (++y < img_y)
+		env->fra.y = -1;
+		while (++env->fra.y < env->fra.img_y)
 		{
-        	env->fract.c_r = x / (double)env->fract.zoom + env->fract.x1;
-        	env->fract.c_i = y / (double)env->fract.zoom + env->fract.y1;
-        	env->fract.z_r = 0;
-        	env->fract.z_i = 0;
-        	i = 0;
-
-        	do{
-            	tmp = env->fract.z_r;
-            	env->fract.z_r = env->fract.z_r*env->fract.z_r - env->fract.z_i*env->fract.z_i + env->fract.c_r;
-            	env->fract.z_i = 2*env->fract.z_i*tmp + env->fract.c_i;
-            	++i;
-        	}while (env->fract.z_r*env->fract.z_r + env->fract.z_i*env->fract.z_i < 4 && i < env->fract.deep);
-
-			if (i == env->fract.deep)
-				put_pixel_img(env, set_pixel(x, y, BLUE));
+			if (env->fra.fractal == 0)
+			{
+				env->fra.c_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
+				env->fra.c_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
+				env->fra.z_r = 0;
+				env->fra.z_i = 0;
+			}
+			else if (env->fra.fractal == 1)
+			{
+				env->fra.c_r = 0.285;
+				env->fra.c_i = 0.01;
+				env->fra.z_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
+				env->fra.z_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
+			}
+        	i = -1;
+			while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
+				&& ++i < env->fra.deep)
+			{
+            	tmp = env->fra.z_r;
+            	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+					env->fra.z_i * env->fra.z_i + env->fra.c_r;
+            	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+        	}
+			// if (i == env->fra.deep)
+			// 	put_pixel_img(env, set_pixel(env->fra.x, env->fra.y, BLACK));
+			if (i != env->fra.deep)
+				put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
+					set_color(env, i)));
     	}
+	}
+}
+
+void 	barnsley(t_env *env)
+{
+	int rnd;
+
+	rnd = rand() % 100;
+
+	while ()
+	{
+		if(rnd == 0)
+		{
+			env->fra.x2 = 0;
+			env->fra.y2 = 0.16 * env->fra.y1;
+		}
+		else if(rnd >= 1 && rnd <= 7)
+		{
+			env->fra.x2 = -0.15 * env->fra.x1 + 0.28 * env->fra.y1;
+			env->fra.y2 = 0.26 * env->fra.x1 + 0.24 * env->fra.y1 + 0.44;
+		}
+		else if(rnd >= 8 && rnd <= 15)
+		{
+			env->fra.x2 = 0.2 * env->fra.x1 - 0.26 * env->fra.y1;
+			env->fra.y2 = 0.23 * env->fra.x1 + 0.22 * env->fra.y1 + 1.6;
+		}
+		else
+		{
+			env->fra.x2 = 0.85 * env->fra.x1 + 0.04 * env->fra.y1;
+			env->fra.y2 = -0.04 * env->fra.x1 + 0.85 * env->fra.y1 + 1.6;
+		}
 	}
 }

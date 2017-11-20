@@ -62,14 +62,28 @@ void set_env(t_env *env)
     env->win.title = ft_strdup("mlx 42 Fract-ol");
     env->img.l = WIDTH_IMG;
     env->img.h = HEIGHT_IMG;
-	env->fract.x1 = -2.1;
-	env->fract.x2 = 0.6;
-	env->fract.y1 = -1.2;
-	env->fract.y2 = 1.2;
-	env->fract.zoom = 100;
-	env->fract.deep = 50;
-	env->fract.c_r = 0;
-	env->fract.c_i = 0;
-	env->fract.z_r = 0;
-	env->fract.z_i = 0;
+	if (env->fra.fractal == 0)
+	{
+		env->fra.x2 = 0.6;
+		env->fra.x1 = -2.1;
+	}
+	if (env->fra.fractal == 1)
+	{
+		env->fra.x2 = 1;
+		env->fra.x1 = -1;
+	}
+	env->fra.y1 = -1.2;
+	env->fra.y2 = 1.2;
+	env->fra.zoom = 250;
+	env->fra.deep = 50;
+	// env->fra.img_x = (env->fra.x2 - env->fra.x1) * env->fra.zoom;
+	// env->fra.img_y = (env->fra.y2 - env->fra.y1) * env->fra.zoom;
+	env->fra.img_x = WIDTH_IMG;
+	env->fra.img_y = WIDTH_IMG;
+	env->fra.x = 0;
+	env->fra.y = 0;
+	env->fra.c_r = 0;
+	env->fra.c_i = 0;
+	env->fra.z_r = 0;
+	env->fra.z_i = 0;
 }

@@ -5,6 +5,7 @@
 # include "libft.h"
 # include <math.h>
 # include <stdio.h> //
+# include <time.h>
 
 # define BLANK			0x00FFFFFF
 # define BLACK			0x00000000
@@ -14,9 +15,9 @@
 # define RANGE_MAP		100000000
 # define RANGE_HEIGHT	100000000
 # define HEIGHT			600
-# define WIDTH			910
+# define WIDTH			850
 # define HEIGHT_IMG		600
-# define WIDTH_IMG		910
+# define WIDTH_IMG		850
 
 # if defined(linux) || defined(__linux) || defined(__linux__)
 #  define ZOOM_IN		116
@@ -39,7 +40,7 @@ typedef struct			s_coords
 
 typedef struct			s_fractal
 {
-	int					nbr;
+	int					fractal;
 	double				x1;
 	double				x2;
 	double				y1;
@@ -50,6 +51,10 @@ typedef struct			s_fractal
 	double				z_i;
 	unsigned int		zoom;
 	unsigned int		deep;
+	unsigned int		img_x;
+	unsigned int		img_y;
+	unsigned int		x;
+	unsigned int		y;
 }						t_fractal;
 
 typedef struct			s_img
@@ -76,7 +81,7 @@ typedef struct			s_env
 	void				*mlx;
 	struct s_img		img;
     struct s_win		win;
-	struct s_fractal	fract;
+	struct s_fractal	fra;
 }                   	t_env;
 
 void 		exit_error(const char *s);

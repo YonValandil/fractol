@@ -13,7 +13,11 @@ int         main(int argc, char *argv[])
     if(argc != 2)
 		exit_error("usage: ./fractol mandelbrot|julia|autres");
 	if (ft_strstr(argv[1], "mandelbrot") != NULL)
-		env.fract.nbr = 0;
+		env.fra.fractal = 0;
+	else if (ft_strstr(argv[1], "julia") != NULL)
+		env.fra.fractal = 1;
+	else if (ft_strstr(argv[1], "barnsley") != NULL)
+		env.fra.fractal = 2;
 	else
 		exit_error("correspond à aucun nom de fractals gérées.");
     set_env(&env);

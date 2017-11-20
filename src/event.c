@@ -19,12 +19,16 @@ int			controller(int keycode, void *param)
 void scale(int keycode, t_env *env)
 {
 	if (keycode == ZOOM_IN)
-		env->fract.zoom += 2;
+	{
+		env->fra.zoom += 2;
+	}
 	if (keycode == ZOOM_OUT)
-		env->fract.zoom -= 2;
+	{
+		env->fra.zoom -= 2;
+	}
 }
 
 void reset(t_env *env)
 {
-	env->fract.zoom = 100;
+	env->fra.zoom = 900;
 }
