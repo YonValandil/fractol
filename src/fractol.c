@@ -51,10 +51,15 @@ void 	fractol(t_env *env)
 void 	barnsley(t_env *env)
 {
 	int rnd;
+	srand(time(NULL));
 
+	unsigned int i = 0;
 	rnd = rand() % 100;
+	env->fra.x1 = 0;
+	env->fra.y1 = 0;
+	env->fra.deep = 500;
 
-	while ()
+	while (i < env->fra.deep)
 	{
 		if(rnd == 0)
 		{
@@ -76,5 +81,11 @@ void 	barnsley(t_env *env)
 			env->fra.x2 = 0.85 * env->fra.x1 + 0.04 * env->fra.y1;
 			env->fra.y2 = -0.04 * env->fra.x1 + 0.85 * env->fra.y1 + 1.6;
 		}
+		// put_pixel_img(env, set_pixel(30 * env->fra.x2 + HEIGHT_IMG / 2,
+		// 	30 * env->fra.y2, GREEN));
+		put_pixel_img(env, set_pixel(env->fra.x2, env->fra.y2, GREEN));
+		env->fra.x1 = env->fra.x2;
+		env->fra.y1 = env->fra.y2;
+		++i;
 	}
 }
