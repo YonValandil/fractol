@@ -40,16 +40,16 @@ typedef struct			s_coords
 typedef struct			s_fractal
 {
 	int					nbr;
-	float				x1;
-	float				x2;
-	float				y1;
-	float				y2;
-	float				c_r;
-	float				c_i;
-	float				z_r;
-	float				z_i;
-	int					zoom;
-	int					deep;
+	double				x1;
+	double				x2;
+	double				y1;
+	double				y2;
+	double				c_r;
+	double				c_i;
+	double				z_r;
+	double				z_i;
+	unsigned int		zoom;
+	unsigned int		deep;
 }						t_fractal;
 
 typedef struct			s_img
