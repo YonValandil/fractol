@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/25 10:47:30 by jjourne           #+#    #+#             */
+/*   Updated: 2017/11/25 11:16:39 by jjourne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int 	set_color(t_env *env, int i)
+int		set_color(t_env *env, int i)
 {
 	return ((i * 255 / env->fra.deep));
 }
 
-void 	fractol(t_env *env)
+void	fractol(t_env *env)
 {
 	double			i;
 	double			tmp;
@@ -48,7 +60,7 @@ void 	fractol(t_env *env)
 	}
 }
 
-void 	barnsley(t_env *env)
+void	barnsley(t_env *env)
 {
 	int rnd;
 	srand(time(NULL));
@@ -61,17 +73,17 @@ void 	barnsley(t_env *env)
 
 	while (i < env->fra.deep)
 	{
-		if(rnd == 0)
+		if (rnd == 0)
 		{
 			env->fra.x2 = 0;
 			env->fra.y2 = 0.16 * env->fra.y1;
 		}
-		else if(rnd >= 1 && rnd <= 7)
+		else if (rnd >= 1 && rnd <= 7)
 		{
 			env->fra.x2 = -0.15 * env->fra.x1 + 0.28 * env->fra.y1;
 			env->fra.y2 = 0.26 * env->fra.x1 + 0.24 * env->fra.y1 + 0.44;
 		}
-		else if(rnd >= 8 && rnd <= 15)
+		else if (rnd >= 8 && rnd <= 15)
 		{
 			env->fra.x2 = 0.2 * env->fra.x1 - 0.26 * env->fra.y1;
 			env->fra.y2 = 0.23 * env->fra.x1 + 0.22 * env->fra.y1 + 1.6;
@@ -81,9 +93,7 @@ void 	barnsley(t_env *env)
 			env->fra.x2 = 0.85 * env->fra.x1 + 0.04 * env->fra.y1;
 			env->fra.y2 = -0.04 * env->fra.x1 + 0.85 * env->fra.y1 + 1.6;
 		}
-		// put_pixel_img(env, set_pixel(30 * env->fra.x2 + HEIGHT_IMG / 2,
-		// 	30 * env->fra.y2, GREEN));
-		put_pixel_img(env, set_pixel(env->fra.x2, env->fra.y2, GREEN));
+		put_pixel_img(env, set_pixel(env->fra.x2 + HEIGHT_IMG / 2, env->fra.y2, GREEN));
 		env->fra.x1 = env->fra.x2;
 		env->fra.y1 = env->fra.y2;
 		++i;

@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/25 10:47:36 by jjourne           #+#    #+#             */
+/*   Updated: 2017/11/25 10:48:32 by jjourne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-t_coords    set_pixel(int x, int y, int color)
+t_coords	set_pixel(int x, int y, int color)
 {
     t_coords p;
 
     p.x = x;
     p.y = y;
     p.color = color;
-
     return (p);
 }
 
-void put_pixel_img(t_env *env, t_coords p)
+void		put_pixel_img(t_env *env, t_coords p)
 {
 	int		r;
 	int		g;
@@ -31,7 +42,7 @@ void put_pixel_img(t_env *env, t_coords p)
 	}
 }
 
-void set_string(t_env *env)
+void		set_string(t_env *env)
 {
 	mlx_string_put(env->mlx, env->win.ptr, 20, 20, GREEN,
 		"press ESC: QUIT");
@@ -43,7 +54,7 @@ void set_string(t_env *env)
 		"press G: ZOOM DOWN");
 }
 
-void set_img(t_env *env)
+void		set_img(t_env *env)
 {
     env->img.ptr = mlx_new_image(env->mlx, env->img.l, env->img.h);
     env->img.data = mlx_get_data_addr(env->img.ptr, &env->img.bpp,
@@ -55,7 +66,7 @@ void set_img(t_env *env)
 	mlx_destroy_image(env->mlx, env->img.ptr);
 }
 
-void set_env(t_env *env)
+void		set_env(t_env *env)
 {
     env->win.l = WIDTH;
     env->win.h = HEIGHT;
