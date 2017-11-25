@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 10:47:30 by jjourne           #+#    #+#             */
-/*   Updated: 2017/11/25 11:16:39 by jjourne          ###   ########.fr       */
+/*   Updated: 2017/11/25 23:33:07 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,40 +62,34 @@ void	fractol(t_env *env)
 
 void	barnsley(t_env *env)
 {
-	int rnd;
-	srand(time(NULL));
+	float rnd;
 
-	unsigned int i = 0;
-	rnd = rand() % 100;
-	env->fra.x1 = 0;
-	env->fra.y1 = 0;
-	env->fra.deep = 500;
-
-	while (i < env->fra.deep)
+	env->fra.deep = 500000;
+	while (env->fra.deep--)
 	{
-		if (rnd == 0)
+		rnd = (float)rand() / RAND_MAX;
+		if (rnd <= 0.01)
 		{
 			env->fra.x2 = 0;
-			env->fra.y2 = 0.16 * env->fra.y1;
+			env->fra.y2 = 0.16 * env->fra.y2;
 		}
-		else if (rnd >= 1 && rnd <= 7)
+		else if (rnd <= 0.06)
 		{
-			env->fra.x2 = -0.15 * env->fra.x1 + 0.28 * env->fra.y1;
-			env->fra.y2 = 0.26 * env->fra.x1 + 0.24 * env->fra.y1 + 0.44;
+			env->fra.x2 = -0.15 * env->fra.x2 + 0.28 * env->fra.y2;
+			env->fra.y2 = 0.26 * env->fra.x2 + 0.24 * env->fra.y2 + 0.44;
 		}
-		else if (rnd >= 8 && rnd <= 15)
+		else if (rnd <= 0.15)
 		{
-			env->fra.x2 = 0.2 * env->fra.x1 - 0.26 * env->fra.y1;
-			env->fra.y2 = 0.23 * env->fra.x1 + 0.22 * env->fra.y1 + 1.6;
+			env->fra.x2 = 0.2 * env->fra.x2 - 0.26 * env->fra.y2;
+			env->fra.y2 = 0.23 * env->fra.x2 + 0.22 * env->fra.y2 + 1.6;
 		}
 		else
 		{
-			env->fra.x2 = 0.85 * env->fra.x1 + 0.04 * env->fra.y1;
-			env->fra.y2 = -0.04 * env->fra.x1 + 0.85 * env->fra.y1 + 1.6;
+			env->fra.x2 = 0.85 * env->fra.x2 + 0.04 * env->fra.y2;
+			env->fra.y2 = -0.04 * env->fra.x2 + 0.85 * env->fra.y2 + 1.6;
 		}
-		put_pixel_img(env, set_pixel(env->fra.x2 + HEIGHT_IMG / 2, env->fra.y2, GREEN));
-		env->fra.x1 = env->fra.x2;
-		env->fra.y1 = env->fra.y2;
-		++i;
+		env->fra.x2 = (env->fra.x2 + 3) * 70;
+		env->fra.y2 = 800 - env->fra.x2 * 70;
+		put_pixel_img(env, set_pixel(env->fra.x2 - 300, env->fra.y2 - 300, GREEN));
 	}
 }

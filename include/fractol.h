@@ -31,6 +31,12 @@
 #  define RESET			49
 # endif
 
+typedef struct			s_xyd
+{
+	double				x;
+	double				y;
+}						t_xyd;
+
 typedef struct			s_coords
 {
 	int					x;
@@ -89,6 +95,7 @@ void		set_env(t_env *env);
 void 		set_img(t_env *env);
 void 		set_string(t_env *env);
 void		fractol(t_env *env);
+void		barnsley(t_env *env);
 void		put_pixel_img(t_env *env, t_coords p);
 t_coords 	set_pixel(int x, int y, int color);
 int			controller(int keycode, void *param);

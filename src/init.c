@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 10:47:36 by jjourne           #+#    #+#             */
-/*   Updated: 2017/11/25 10:48:32 by jjourne          ###   ########.fr       */
+/*   Updated: 2017/11/25 23:13:51 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_coords	set_pixel(int x, int y, int color)
     return (p);
 }
 
-void		put_pixel_img(t_env *env, t_coords p)
+void		put_pixel_img(t_env *env, t_coords p)// send s_img instead of env
 {
 	int		r;
 	int		g;
@@ -60,7 +60,10 @@ void		set_img(t_env *env)
     env->img.data = mlx_get_data_addr(env->img.ptr, &env->img.bpp,
     	&env->img.size_line, &env->img.endian);
 	mlx_clear_window(env->mlx, env->win.ptr);
-	fractol(env);
+	if (env->fra.fractal <= 1)
+		fractol(env);
+	else
+		barnsley(env);
     mlx_put_image_to_window(env->mlx, env->win.ptr, env->img.ptr, 0, 0);
 	set_string(env);
 	mlx_destroy_image(env->mlx, env->img.ptr);
