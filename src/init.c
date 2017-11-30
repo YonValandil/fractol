@@ -1,28 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/25 10:47:36 by jjourne           #+#    #+#             */
-/*   Updated: 2017/11/25 23:13:51 by jjourne          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fractol.h"
 
-t_coords	set_pixel(int x, int y, int color)
+t_coords    set_pixel(int x, int y, int color)
 {
     t_coords p;
 
     p.x = x;
     p.y = y;
     p.color = color;
+
     return (p);
 }
 
-void		put_pixel_img(t_env *env, t_coords p)// send s_img instead of env
+void put_pixel_img(t_env *env, t_coords p)
 {
 	int		r;
 	int		g;
@@ -42,7 +31,7 @@ void		put_pixel_img(t_env *env, t_coords p)// send s_img instead of env
 	}
 }
 
-void		set_string(t_env *env)
+void set_string(t_env *env)
 {
 	mlx_string_put(env->mlx, env->win.ptr, 20, 20, GREEN,
 		"press ESC: QUIT");
@@ -54,22 +43,22 @@ void		set_string(t_env *env)
 		"press G: ZOOM DOWN");
 }
 
-void		set_img(t_env *env)
+void set_img(t_env *env)
 {
     env->img.ptr = mlx_new_image(env->mlx, env->img.l, env->img.h);
     env->img.data = mlx_get_data_addr(env->img.ptr, &env->img.bpp,
     	&env->img.size_line, &env->img.endian);
 	mlx_clear_window(env->mlx, env->win.ptr);
-	if (env->fra.fractal <= 1)
+	if (env->fra.fractal == 0 || env->fra.fractal == 1)
 		fractol(env);
-	else
+	else if (env->fra.fractal == 2)
 		barnsley(env);
     mlx_put_image_to_window(env->mlx, env->win.ptr, env->img.ptr, 0, 0);
 	set_string(env);
 	mlx_destroy_image(env->mlx, env->img.ptr);
 }
 
-void		set_env(t_env *env)
+void set_env(t_env *env)
 {
     env->win.l = WIDTH;
     env->win.h = HEIGHT;

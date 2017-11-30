@@ -63,6 +63,8 @@ void	fractol(t_env *env)
 void	barnsley(t_env *env)
 {
 	float rnd;
+	int x;
+	int y;
 
 	env->fra.deep = 500000;
 	while (env->fra.deep--)
@@ -78,9 +80,9 @@ void	barnsley(t_env *env)
 			env->fra.x2 = -0.15 * env->fra.x2 + 0.28 * env->fra.y2;
 			env->fra.y2 = 0.26 * env->fra.x2 + 0.24 * env->fra.y2 + 0.44;
 		}
-		else if (rnd <= 0.15)
+		else if (rnd <= 0.14)
 		{
-			env->fra.x2 = 0.2 * env->fra.x2 - 0.26 * env->fra.y2;
+			env->fra.x2 = 0.2 * env->fra.x2 + -0.26 * env->fra.y2;
 			env->fra.y2 = 0.23 * env->fra.x2 + 0.22 * env->fra.y2 + 1.6;
 		}
 		else
@@ -88,8 +90,8 @@ void	barnsley(t_env *env)
 			env->fra.x2 = 0.85 * env->fra.x2 + 0.04 * env->fra.y2;
 			env->fra.y2 = -0.04 * env->fra.x2 + 0.85 * env->fra.y2 + 1.6;
 		}
-		env->fra.x2 = (env->fra.x2 + 3) * 70;
-		env->fra.y2 = 800 - env->fra.x2 * 70;
-		put_pixel_img(env, set_pixel(env->fra.x2 - 300, env->fra.y2 - 300, GREEN));
+		x = (env->fra.x2 + 3) * 70;
+		y = 800 - env->fra.y2 * 70;
+		put_pixel_img(env, set_pixel(x + 200, y - 50, GREEN));
 	}
 }
