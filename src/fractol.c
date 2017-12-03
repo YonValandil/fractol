@@ -12,16 +12,18 @@
 
 #include "fractol.h"
 
-int		set_color(t_env *env, int i)
-{
-	return ((i * 255 / env->fra.deep));
-}
-
-void	fractol(t_env *env)
+void	fractals(t_env *env)
 {
 	double			i;
 	double			tmp;
 
+	if (env->fra.fractal == 2)
+	{
+		barnsley(env);
+		return ;
+	}
+	i = -1;
+	tmp = -1;
 	env->fra.x = -1;
 	while (++env->fra.x < env->fra.img_x)
 	{
@@ -29,44 +31,62 @@ void	fractol(t_env *env)
 		while (++env->fra.y < env->fra.img_y)
 		{
 			if (env->fra.fractal == 0)
-			{
-				env->fra.c_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
-				env->fra.c_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
-				env->fra.z_r = 0;
-				env->fra.z_i = 0;
-			}
-			else if (env->fra.fractal == 1)
-			{
-				env->fra.c_r = 0.285;
-				env->fra.c_i = 0.01;
-				env->fra.z_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
-				env->fra.z_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
-			}
-        	i = -1;
-			while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
-				&& ++i < env->fra.deep)
-			{
-            	tmp = env->fra.z_r;
-            	env->fra.z_r = env->fra.z_r * env->fra.z_r -
-					env->fra.z_i * env->fra.z_i + env->fra.c_r;
-            	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
-        	}
-			// if (i == env->fra.deep)
-			// 	put_pixel_img(env, set_pixel(env->fra.x, env->fra.y, BLACK));
-			if (i != env->fra.deep)
-				put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
-					set_color(env, i)));
+				mandelbrot(env, i, tmp);
+			if (env->fra.fractal == 1)
+				julia(env, i, tmp);
     	}
 	}
+}
+
+void 	julia(t_env *env, double i, double tmp)
+{
+	env->fra.x1 = -1;
+	env->fra.x2 = 1;
+	env->fra.c_r = 0.285;
+	env->fra.c_i = 0.01;
+	env->fra.z_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
+	env->fra.z_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
+	i = -1;
+	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
+		&& ++i < env->fra.deep)
+	{
+    	tmp = env->fra.z_r;
+    	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+			env->fra.z_i * env->fra.z_i + env->fra.c_r;
+    	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+	}
+	if (i != env->fra.deep)
+		put_pixel_img(env, set_pixel(env->fra.x + 200, env->fra.y,
+			i * 255 / env->fra.deep));
+}
+
+void 	mandelbrot(t_env *env, double i, double tmp)
+{
+	env->fra.x1 = -2.1;
+	env->fra.x2 = 0.6;
+	env->fra.c_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
+	env->fra.c_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
+	env->fra.z_r = 0;
+	env->fra.z_i = 0;
+	i = -1;
+	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
+		&& ++i < env->fra.deep)
+	{
+    	tmp = env->fra.z_r;
+    	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+			env->fra.z_i * env->fra.z_i + env->fra.c_r;
+    	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+	}
+	if (i != env->fra.deep)
+		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
+			i * 255 / env->fra.deep));
 }
 
 void	barnsley(t_env *env)
 {
 	float rnd;
-	int x;
-	int y;
+	t_coords c;
 
-	env->fra.deep = 500000;
 	while (env->fra.deep--)
 	{
 		rnd = (float)rand() / RAND_MAX;
@@ -90,8 +110,8 @@ void	barnsley(t_env *env)
 			env->fra.x2 = 0.85 * env->fra.x2 + 0.04 * env->fra.y2;
 			env->fra.y2 = -0.04 * env->fra.x2 + 0.85 * env->fra.y2 + 1.6;
 		}
-		x = (env->fra.x2 + 3) * 70;
-		y = 800 - env->fra.y2 * 70;
-		put_pixel_img(env, set_pixel(x + 200, y - 50, GREEN));
+		c.x = (env->fra.x2 + 3) * 70;
+		c.y = 800 - env->fra.y2 * 70;
+		put_pixel_img(env, set_pixel(c.x + 200, c.y - 100, GREEN));
 	}
 }

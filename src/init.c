@@ -49,10 +49,7 @@ void set_img(t_env *env)
     env->img.data = mlx_get_data_addr(env->img.ptr, &env->img.bpp,
     	&env->img.size_line, &env->img.endian);
 	mlx_clear_window(env->mlx, env->win.ptr);
-	if (env->fra.fractal == 0 || env->fra.fractal == 1)
-		fractol(env);
-	else if (env->fra.fractal == 2)
-		barnsley(env);
+	fractals(env);
     mlx_put_image_to_window(env->mlx, env->win.ptr, env->img.ptr, 0, 0);
 	set_string(env);
 	mlx_destroy_image(env->mlx, env->img.ptr);
@@ -65,20 +62,12 @@ void set_env(t_env *env)
     env->win.title = ft_strdup("mlx 42 Fract-ol");
     env->img.l = WIDTH_IMG;
     env->img.h = HEIGHT_IMG;
-	if (env->fra.fractal == 0)
-	{
-		env->fra.x2 = 0.6;
-		env->fra.x1 = -2.1;
-	}
-	if (env->fra.fractal == 1)
-	{
-		env->fra.x2 = 1;
-		env->fra.x1 = -1;
-	}
 	env->fra.y1 = -1.2;
 	env->fra.y2 = 1.2;
 	env->fra.zoom = 250;
 	env->fra.deep = 50;
+	if (env->fra.fractal == 2)
+		env->fra.deep = 50000;
 	// env->fra.img_x = (env->fra.x2 - env->fra.x1) * env->fra.zoom;
 	// env->fra.img_y = (env->fra.y2 - env->fra.y1) * env->fra.zoom;
 	env->fra.img_x = WIDTH_IMG;
