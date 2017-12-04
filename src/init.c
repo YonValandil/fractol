@@ -68,10 +68,8 @@ void set_env(t_env *env)
 	env->fra.deep = 50;
 	if (env->fra.fractal == 2)
 		env->fra.deep = 50000;
-	// env->fra.img_x = (env->fra.x2 - env->fra.x1) * env->fra.zoom;
-	// env->fra.img_y = (env->fra.y2 - env->fra.y1) * env->fra.zoom;
 	env->fra.img_x = WIDTH_IMG;
-	env->fra.img_y = WIDTH_IMG;
+	env->fra.img_y = HEIGHT_IMG;
 	env->fra.x = 0;
 	env->fra.y = 0;
 	env->fra.c_r = 0;

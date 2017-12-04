@@ -20,13 +20,13 @@
 # define WIDTH_IMG		850
 
 # if defined(linux) || defined(__linux) || defined(__linux__)
-#  define ZOOM_IN		116
-#  define ZOOM_OUT		103
+#  define ZOOM_IN		1
+#  define ZOOM_OUT		3
 #  define ESCAPE		65307
 #  define RESET			32
 # elif defined(__APPLE__)
-#  define ZOOM_IN		17
-#  define ZOOM_OUT		5
+#  define ZOOM_IN		5
+#  define ZOOM_OUT		4
 #  define ESCAPE		53
 #  define RESET			49
 # endif
@@ -50,6 +50,8 @@ typedef struct			s_fractal
 	double				z_r;
 	double				z_i;
 	unsigned int		zoom;
+	unsigned int		zoom_x;
+	unsigned int		zoom_y;
 	unsigned int		deep;
 	unsigned int		img_x;
 	unsigned int		img_y;
@@ -95,7 +97,8 @@ void		barnsley(t_env *env);
 void		put_pixel_img(t_env *env, t_coords p);
 t_coords 	set_pixel(int x, int y, int color);
 int			controller(int keycode, void *param);
-void 		zoom(int keycode, t_env *env);
+int 		mouse_pos(int x, int y, t_env *env);
+int 		mouse_zoom(int keycode, int x, int y, t_env *env);
 void 		reset(t_env *env);
 
 #endif
