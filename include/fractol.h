@@ -90,6 +90,7 @@ void 		exit_error(const char *s);
 void		set_env(t_env *env);
 void 		set_img(t_env *env);
 void 		set_string(t_env *env);
+void 		init_fractals(t_env *env);
 void		fractals(t_env *env);
 void		julia(t_env *env, double, double);
 void		mandelbrot(t_env *env, double, double);

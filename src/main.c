@@ -6,6 +6,25 @@ void 		exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
+void 	init_fractals(t_env *env)
+{
+	env->fra.y1 = -1.2;
+	env->fra.y2 = 1.2;
+	if (env->fra.fractal == 0)
+	{
+		env->fra.x1 = -2.1;
+		env->fra.x2 = 0.6;
+	}
+	if (env->fra.fractal == 1)
+	{
+		env->fra.x1 = -1;
+		env->fra.x2 = 1;
+	}
+	env->fra.deep = 50;
+	if (env->fra.fractal == 2)
+		env->fra.deep = 50000;
+}
+
 int         main(int argc, char *argv[])
 {
     t_env       env;

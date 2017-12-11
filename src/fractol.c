@@ -40,8 +40,6 @@ void	fractals(t_env *env)
 
 void 	julia(t_env *env, double i, double tmp)
 {
-	env->fra.x1 = -1;
-	env->fra.x2 = 1;
 	env->fra.c_r = 0.285;
 	env->fra.c_i = 0.01;
 	env->fra.z_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
@@ -62,8 +60,6 @@ void 	julia(t_env *env, double i, double tmp)
 
 void 	mandelbrot(t_env *env, double i, double tmp)
 {
-	env->fra.x1 = -2.1;
-	env->fra.x2 = 0.6;
 	env->fra.c_r = env->fra.x / (double)env->fra.zoom + env->fra.x1;
 	env->fra.c_i = env->fra.y / (double)env->fra.zoom + env->fra.y1;
 	env->fra.z_r = 0;
