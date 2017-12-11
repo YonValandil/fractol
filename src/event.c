@@ -56,5 +56,5 @@ int mouse_pos(int x, int y, t_env *env)
 
 void reset(t_env *env)
 {
-	env->fra.zoom = 250;
+	init_fractals(env);
 }

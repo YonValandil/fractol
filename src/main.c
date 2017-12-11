@@ -6,24 +6,36 @@ void 		exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
-void 	init_fractals(t_env *env)
+t_coords    set_pixel(int x, int y, int color)
 {
-	env->fra.y1 = -1.2;
-	env->fra.y2 = 1.2;
-	if (env->fra.fractal == 0)
-	{
-		env->fra.x1 = -2.1;
-		env->fra.x2 = 0.6;
-	}
-	if (env->fra.fractal == 1)
-	{
-		env->fra.x1 = -1;
-		env->fra.x2 = 1;
-	}
-	env->fra.deep = 50;
-	if (env->fra.fractal == 2)
-		env->fra.deep = 50000;
+    t_coords p;
+
+    p.x = x;
+    p.y = y;
+    p.color = color;
+    return (p);
 }
+
+void put_pixel_img(t_env *env, t_coords p)
+{
+	int		r;
+	int		g;
+	int		b;
+
+	r = (p.color & 0xFF0000) >> 16;
+	g = (p.color & 0xFF00) >> 8;
+	b = (p.color & 0xFF);
+	if (p.y >= 0 && p.x >= 0 && p.y < HEIGHT_IMG && p.x < WIDTH_IMG)
+	{
+		env->img.data[(p.y * env->img.size_line) +
+			((env->img.bpp / 8) * p.x) + 2] = r;
+		env->img.data[(p.y * env->img.size_line) +
+			((env->img.bpp / 8) * p.x) + 1] = g;
+		env->img.data[(p.y * env->img.size_line) +
+			((env->img.bpp / 8) * p.x)] = b;
+	}
+}
+
 
 int         main(int argc, char *argv[])
 {

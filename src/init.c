@@ -1,34 +1,23 @@
 #include "fractol.h"
 
-t_coords    set_pixel(int x, int y, int color)
+void 	init_fractals(t_env *env)
 {
-    t_coords p;
-
-    p.x = x;
-    p.y = y;
-    p.color = color;
-
-    return (p);
-}
-
-void put_pixel_img(t_env *env, t_coords p)
-{
-	int		r;
-	int		g;
-	int		b;
-
-	r = (p.color & 0xFF0000) >> 16;
-	g = (p.color & 0xFF00) >> 8;
-	b = (p.color & 0xFF);
-	if (p.y >= 0 && p.x >= 0 && p.y < HEIGHT_IMG && p.x < WIDTH_IMG)
+	env->fra.zoom = 250;
+	env->fra.y1 = -1.2;
+	env->fra.y2 = 1.2;
+	if (env->fra.fractal == 0)
 	{
-		env->img.data[(p.y * env->img.size_line) +
-			((env->img.bpp / 8) * p.x) + 2] = r;
-		env->img.data[(p.y * env->img.size_line) +
-			((env->img.bpp / 8) * p.x) + 1] = g;
-		env->img.data[(p.y * env->img.size_line) +
-			((env->img.bpp / 8) * p.x)] = b;
+		env->fra.x1 = -2.1;
+		env->fra.x2 = 0.6;
 	}
+	if (env->fra.fractal == 1)
+	{
+		env->fra.x1 = -1;
+		env->fra.x2 = 1;
+	}
+	env->fra.deep = 50;
+	if (env->fra.fractal == 2)
+		env->fra.deep = 50000;
 }
 
 void set_string(t_env *env)
@@ -62,10 +51,9 @@ void set_env(t_env *env)
     env->win.title = ft_strdup("mlx 42 Fract-ol");
     env->img.l = WIDTH_IMG;
     env->img.h = HEIGHT_IMG;
-	init_fractals(env);
-	env->fra.zoom = 250;
 	env->fra.img_x = WIDTH_IMG;
 	env->fra.img_y = HEIGHT_IMG;
+	init_fractals(env);
 	env->fra.x = 0;
 	env->fra.y = 0;
 	env->fra.c_r = 0;
