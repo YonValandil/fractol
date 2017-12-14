@@ -25,8 +25,8 @@
 #  define ESCAPE		65307
 #  define RESET			32
 # elif defined(__APPLE__)
-#  define ZOOM_IN		5
-#  define ZOOM_OUT		4
+#  define ZOOM_IN		1
+#  define ZOOM_OUT		2
 #  define ESCAPE		53
 #  define RESET			49
 # endif
@@ -49,7 +49,7 @@ typedef struct			s_fractal
 	double				c_i;
 	double				z_r;
 	double				z_i;
-	unsigned int		zoom;
+	double				zoom;
 	unsigned int		zoom_x;
 	unsigned int		zoom_y;
 	unsigned int		deep;
