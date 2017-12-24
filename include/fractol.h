@@ -1,7 +1,7 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include </usr/local/include/mlx.h>
+# include "../minilibx_macos/mlx.h"
 # include "libft.h"
 # include <math.h>
 # include <stdio.h> //
@@ -15,9 +15,9 @@
 # define RANGE_MAP		100000000
 # define RANGE_HEIGHT	100000000
 # define HEIGHT			600
-# define WIDTH			850
+# define WIDTH			600
 # define HEIGHT_IMG		600
-# define WIDTH_IMG		850
+# define WIDTH_IMG		600
 
 # if defined(linux) || defined(__linux) || defined(__linux__)
 #  define ZOOM_IN		1

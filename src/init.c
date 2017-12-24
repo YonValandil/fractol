@@ -3,8 +3,10 @@
 void 	init_fractals(t_env *env)
 {
 	env->fra.zoom = 250;
-	env->fra.y1 = -1.2;
-	env->fra.y2 = 1.2;
+	env->fra.y1 = -1.5;
+	env->fra.y2 = 1.7;
+	env->fra.x1 = -2;
+	env->fra.x2 = 1.5;
 	env->fra.c_r = 0;
 	env->fra.c_i = 0;
 	if (env->fra.fractal == 0)
@@ -12,16 +14,7 @@ void 	init_fractals(t_env *env)
 		env->fra.x1 = -2.1;
 		env->fra.x2 = 0.6;
 	}
-	if (env->fra.fractal == 1)
-	{
-		env->fra.x1 = -1;
-		env->fra.x2 = 1;
-		env->fra.c_r = 0.285;
-		env->fra.c_i = 0.01;
-	}
-	env->fra.deep = 50;
-	if (env->fra.fractal == 2)
-		env->fra.deep = 50000;
+	env->fra.deep = 250;
 }
 
 void set_string(t_env *env)

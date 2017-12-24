@@ -16,32 +16,29 @@ int			controller(int keycode, void *param)
 
 int mouse_zoom(int keycode, int x, int y, t_env *env)
 {
+	double tmp_x;
+	double tmp_y;
+
 	if (x >= 0 && x <= WIDTH_IMG && y >= 0 && y <= HEIGHT_IMG)
 	{
+		env->fra.zoom = 1;
 		printf("mouse_zoom => keycode : %d, x: %d, y: %d\n", x, y, keycode);
 		if (keycode == ZOOM_IN || keycode == 5)
-		{
-			env->fra.zoom *= 1.1;
-			env->fra.x1 = x - (x - env->fra.x1) / env->fra.zoom;
-			env->fra.x2 = x + (env->fra.x2 - x) / env->fra.zoom;
-			env->fra.y1 = y + (env->fra.y1 - y) / env->fra.zoom;
-			env->fra.y2 = y - (y - env->fra.y2) / env->fra.zoom;
-
-			//env->fra.x1 += (x - WIDTH_IMG / 2) / (double)WIDTH_IMG / env->fra.zoom;
-			//env->fra.y1 += (y - HEIGHT_IMG / 2) / (double)HEIGHT_IMG / env->fra.zoom;
-		}
+			env->fra.zoom = 1.1;
 		if (keycode == ZOOM_OUT || keycode == 4)
-		{
 			env->fra.zoom /= 1.1;
-			env->fra.x1 = x - (x - env->fra.x1) / (double)env->fra.zoom;
-			env->fra.x2 = x + (env->fra.x2 - x) / (double)env->fra.zoom;
-			env->fra.y1 = y + (env->fra.y1 - y) / (double)env->fra.zoom;
-			env->fra.y2 = y - (y - env->fra.y2) / (double)env->fra.zoom;
-
-			//env->fra.x1 -= (x - WIDTH_IMG / 2) / (double)WIDTH_IMG / env->fra.zoom;
-			//env->fra.y1 -= (y - HEIGHT_IMG / 2) / (double)HEIGHT_IMG / env->fra.zoom;
+		if (keycode == ZOOM_OUT || keycode == 4 || keycode == ZOOM_IN || keycode == 5)
+		{	
+			tmp_x = (double)x * ((env->fra.x2 - env->fra.x1) / WIDTH) + env->fra.x1;
+			tmp_y = (double)y * ((env->fra.y2 - env->fra.y1) / HEIGHT) + env->fra.y1;
+			tmp_x -= tmp_x * env->fra.zoom;
+			tmp_y -= tmp_y * env->fra.zoom;
+			env->fra.x1 = env->fra.x1 * env->fra.zoom + tmp_x;
+			env->fra.x2 = env->fra.x2 * env->fra.zoom + tmp_x;
+			env->fra.y1 = env->fra.y1 * env->fra.zoom + tmp_y;
+			env->fra.y2 = env->fra.y2 * env->fra.zoom + tmp_y;
+			set_img(env);
 		}
-		set_img(env);
 	}
 	return (0);
 }

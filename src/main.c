@@ -56,7 +56,7 @@ int         main(int argc, char *argv[])
     env.win.ptr = mlx_new_window(env.mlx, env.win.l, env.win.h, env.win.title);
 	set_img(&env);
 	mlx_mouse_hook(env.win.ptr, mouse_zoom, &env); //zoom reel
-	mlx_hook(env.win.ptr, 2, 3, controller, &env);
+	mlx_hook(env.win.ptr, 2, (1L << 0), controller, &env);
 	mlx_hook(env.win.ptr, 6, 7, mouse_pos, &env); //pour ensemble de julia
     mlx_loop(env.mlx);
     return (0);
