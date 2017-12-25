@@ -14,8 +14,8 @@
 
 void	fractals(t_env *env)
 {
-	double			i;
-	double			tmp;
+	double	i;
+	double	tmp;
 
 	if (env->fra.fractal == 3)
 	{
@@ -36,11 +36,11 @@ void	fractals(t_env *env)
 				julia(env, i, tmp);
 			if (env->fra.fractal == 2)
 				tricorn(env, i, tmp);
-    	}
+		}
 	}
 }
 
-void 	julia(t_env *env, double i, double tmp)
+void	julia(t_env *env, double i, double tmp)
 {
 	env->fra.z_r = env->fra.x1 + env->fra.x *
 		((env->fra.x2 - env->fra.x1) / WIDTH);
@@ -50,17 +50,17 @@ void 	julia(t_env *env, double i, double tmp)
 	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
 		&& ++i < env->fra.deep)
 	{
-    	tmp = env->fra.z_r;
-    	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+		tmp = env->fra.z_r;
+		env->fra.z_r = env->fra.z_r * env->fra.z_r -
 			env->fra.z_i * env->fra.z_i + env->fra.c_r;
-    	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+		env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
 	}
 	if (i != env->fra.deep)
 		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
 			i * 255 / env->fra.deep));
 }
 
-void 	mandelbrot(t_env *env, double i, double tmp)
+void	mandelbrot(t_env *env, double i, double tmp)
 {
 	env->fra.c_r = env->fra.x1 + env->fra.x *
 		((env->fra.x2 - env->fra.x1) / WIDTH);
@@ -72,17 +72,17 @@ void 	mandelbrot(t_env *env, double i, double tmp)
 	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
 		&& ++i < env->fra.deep)
 	{
-    	tmp = env->fra.z_r;
-    	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+		tmp = env->fra.z_r;
+		env->fra.z_r = env->fra.z_r * env->fra.z_r -
 			env->fra.z_i * env->fra.z_i + env->fra.c_r;
-    	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+		env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
 	}
 	if (i != env->fra.deep)
 		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
 			i * 255 / env->fra.deep));
 }
 
-void 	tricorn(t_env *env, double i, double tmp)
+void	tricorn(t_env *env, double i, double tmp)
 {
 	env->fra.c_r = env->fra.x1 + env->fra.x *
 		((env->fra.x2 - env->fra.x1) / WIDTH);
@@ -94,10 +94,10 @@ void 	tricorn(t_env *env, double i, double tmp)
 	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
 		&& ++i < env->fra.deep)
 	{
-    	tmp = env->fra.z_r;
-    	env->fra.z_r = env->fra.z_r * env->fra.z_r -
+		tmp = env->fra.z_r;
+		env->fra.z_r = env->fra.z_r * env->fra.z_r -
 			env->fra.z_i * env->fra.z_i + env->fra.c_r;
-    	env->fra.z_i = -2 * env->fra.z_i * tmp + env->fra.c_i;
+		env->fra.z_i = -2 * env->fra.z_i * tmp + env->fra.c_i;
 	}
 	if (i != env->fra.deep)
 		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
@@ -106,8 +106,8 @@ void 	tricorn(t_env *env, double i, double tmp)
 
 void	barnsley(t_env *env)
 {
-	float rnd;
-	t_coords c;
+	float		rnd;
+	t_coords	c;
 
 	while (env->fra.deep--)
 	{
