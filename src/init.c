@@ -6,7 +6,7 @@
 /*   By: jjourne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 19:22:05 by jjourne           #+#    #+#             */
-/*   Updated: 2017/12/25 19:22:07 by jjourne          ###   ########.fr       */
+/*   Updated: 2017/12/25 20:38:41 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ void	set_string(t_env *env)
 		"press ESC: QUIT");
 	mlx_string_put(env->mlx, env->win.ptr, 20, 40, GREEN,
 		"press SPACE: RESET");
-	mlx_string_put(env->mlx, env->win.ptr, 220, 20, GREEN,
-		"press T: ZOOM UP");
-	mlx_string_put(env->mlx, env->win.ptr, 220, 40, GREEN,
-		"press G: ZOOM DOWN");
 }
 
 void	set_img(t_env *env)
