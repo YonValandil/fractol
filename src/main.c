@@ -12,23 +12,23 @@
 
 #include "fractol.h"
 
-void 		exit_error(const char *s)
+void		exit_error(const char *s)
 {
 	ft_putendl_fd(s, 2);
 	exit(EXIT_FAILURE);
 }
 
-t_coords    set_pixel(int x, int y, int color)
+t_coords	set_pixel(int x, int y, int color)
 {
-    t_coords p;
+	t_coords p;
 
-    p.x = x;
-    p.y = y;
-    p.color = color;
-    return (p);
+	p.x = x;
+	p.y = y;
+	p.color = color;
+	return (p);
 }
 
-void put_pixel_img(t_env *env, t_coords p)
+void		put_pixel_img(t_env *env, t_coords p)
 {
 	int		r;
 	int		g;
@@ -48,32 +48,29 @@ void put_pixel_img(t_env *env, t_coords p)
 	}
 }
 
-
-int         main(int argc, char *argv[])
+int			main(int argc, char *argv[])
 {
-    t_env       env;
+	t_env	env;
 
-    if(argc != 2)
+	if (argc != 2)
 		exit_error("usage: ./fractol mandelbrot|julia|tricorn|barnsley");
 	if (ft_strstr(argv[1], "mandelbrot") != NULL)
 		env.fra.fractal = 0;
 	else if (ft_strstr(argv[1], "julia") != NULL)
 		env.fra.fractal = 1;
-		else if (ft_strstr(argv[1], "tricorn") != NULL)
-			env.fra.fractal = 2;
+	else if (ft_strstr(argv[1], "tricorn") != NULL)
+		env.fra.fractal = 2;
 	else if (ft_strstr(argv[1], "barnsley") != NULL)
 		env.fra.fractal = 3;
 	else
 		exit_error("correspond à aucun nom de fractals gérées.");
-    set_env(&env);
-    env.mlx = mlx_init();
-    env.win.ptr = mlx_new_window(env.mlx, env.win.l, env.win.h, env.win.title);
+	set_env(&env);
+	env.mlx = mlx_init();
+	env.win.ptr = mlx_new_window(env.mlx, env.win.l, env.win.h, env.win.title);
 	set_img(&env);
 	mlx_mouse_hook(env.win.ptr, mouse_zoom, &env);
 	mlx_hook(env.win.ptr, 2, (1L << 0), controller, &env);
 	mlx_hook(env.win.ptr, 6, 7, mouse_pos, &env);
-    mlx_loop(env.mlx);
-		while (1)
-		;
-    return (0);
+	mlx_loop(env.mlx);
+	return (0);
 }
