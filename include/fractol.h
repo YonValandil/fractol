@@ -81,6 +81,8 @@ typedef struct			s_win
 typedef struct			s_env
 {
 	void				*mlx;
+	int				tmp_x;
+	int				tmp_y;
 	struct s_img		img;
     struct s_win		win;
 	struct s_fractal	fra;
@@ -93,12 +95,14 @@ void 		set_string(t_env *env);
 void 		init_fractals(t_env *env);
 void		fractals(t_env *env);
 void		julia(t_env *env, double, double);
+void		tricorn(t_env *env, double, double);
 void		mandelbrot(t_env *env, double, double);
 void		barnsley(t_env *env);
 void		put_pixel_img(t_env *env, t_coords p);
 t_coords 	set_pixel(int x, int y, int color);
 int			controller(int keycode, void *param);
 int 		mouse_pos(int x, int y, t_env *env);
+void 		calcul_zoom(t_env *env, int x, int y);
 int 		mouse_zoom(int keycode, int x, int y, t_env *env);
 void 		reset(t_env *env);
 
