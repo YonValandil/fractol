@@ -40,8 +40,10 @@ void	fractals(t_env *env)
 
 void 	julia(t_env *env, double i, double tmp)
 {
-	env->fra.z_r = env->fra.x / env->fra.zoom + env->fra.x1;
-	env->fra.z_i = env->fra.y / env->fra.zoom + env->fra.y1;
+	// env->fra.z_r = env->fra.x / env->fra.zoom + env->fra.x1;
+	// env->fra.z_i = env->fra.y / env->fra.zoom + env->fra.y1;
+	env->fra.z_r = env->fra.x1 + env->fra.x * ((env->fra.x2 - env->fra.x1) / WIDTH);
+	env->fra.z_i = env->fra.y1 + env->fra.y * ((env->fra.y2 - env->fra.y1) / HEIGHT);
 	i = -1;
 	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
 		&& ++i < env->fra.deep)
@@ -69,12 +71,14 @@ void 	mandelbrot(t_env *env, double i, double tmp)
     	tmp = env->fra.z_r;
     	env->fra.z_r = env->fra.z_r * env->fra.z_r -
 			env->fra.z_i * env->fra.z_i + env->fra.c_r;
-    	env->fra.z_i = 2 * env->fra.z_i * tmp + env->fra.c_i;
+    	env->fra.z_i = -2 * env->fra.z_i * tmp + env->fra.c_i;
 	}
 	if (i != env->fra.deep)
 		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
 			i * 255 / env->fra.deep));
 }
+
+/*tricorn */
 
 void	barnsley(t_env *env)
 {

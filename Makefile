@@ -9,7 +9,7 @@ OBJS_DIR =	./
 LIB_DIR = 	./libft/
 MLX = 		-I ./minilibx_macos -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 HEADER =	./include/
-CFLAGS =	-Wall -Werror -Wextra -g
+CFLAGS =	-Wall -Werror -Wextra -g -O3
 ARFLAGS =	-rcs
 CFILES =	main init event fractol
 

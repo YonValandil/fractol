@@ -15,6 +15,16 @@ void 	init_fractals(t_env *env)
 		env->fra.x2 = 0.6;
 	}
 	env->fra.deep = 250;
+	if (env->fra.fractal == 1)
+	{
+		env->fra.x1 = -1;
+		env->fra.x2 = 1;
+		env->fra.c_r = 0.285;
+		env->fra.c_i = 0.01;
+	}
+	//env->fra.deep = 50;
+	if (env->fra.fractal == 2)
+		env->fra.deep = 50000;
 }
 
 void set_string(t_env *env)
