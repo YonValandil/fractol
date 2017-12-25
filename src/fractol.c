@@ -42,8 +42,10 @@ void	fractals(t_env *env)
 
 void 	julia(t_env *env, double i, double tmp)
 {
-	env->fra.z_r = env->fra.x1 + env->fra.x * ((env->fra.x2 - env->fra.x1) / WIDTH);
-	env->fra.z_i = env->fra.y1 + env->fra.y * ((env->fra.y2 - env->fra.y1) / HEIGHT);
+	env->fra.z_r = env->fra.x1 + env->fra.x *
+		((env->fra.x2 - env->fra.x1) / WIDTH);
+	env->fra.z_i = env->fra.y1 + env->fra.y *
+		((env->fra.y2 - env->fra.y1) / HEIGHT);
 	i = -1;
 	while (env->fra.z_r * env->fra.z_r + env->fra.z_i * env->fra.z_i < 4
 		&& ++i < env->fra.deep)
@@ -60,8 +62,10 @@ void 	julia(t_env *env, double i, double tmp)
 
 void 	mandelbrot(t_env *env, double i, double tmp)
 {
-	env->fra.c_r = env->fra.x1 + env->fra.x * ((env->fra.x2 - env->fra.x1) / WIDTH);
-	env->fra.c_i = env->fra.y1 + env->fra.y * ((env->fra.y2 - env->fra.y1) / HEIGHT);
+	env->fra.c_r = env->fra.x1 + env->fra.x *
+		((env->fra.x2 - env->fra.x1) / WIDTH);
+	env->fra.c_i = env->fra.y1 + env->fra.y *
+		((env->fra.y2 - env->fra.y1) / HEIGHT);
 	env->fra.z_r = 0;
 	env->fra.z_i = 0;
 	i = -1;
@@ -80,8 +84,10 @@ void 	mandelbrot(t_env *env, double i, double tmp)
 
 void 	tricorn(t_env *env, double i, double tmp)
 {
-	env->fra.c_r = env->fra.x1 + env->fra.x * ((env->fra.x2 - env->fra.x1) / WIDTH);
-	env->fra.c_i = env->fra.y1 + env->fra.y * ((env->fra.y2 - env->fra.y1) / HEIGHT);
+	env->fra.c_r = env->fra.x1 + env->fra.x *
+		((env->fra.x2 - env->fra.x1) / WIDTH);
+	env->fra.c_i = env->fra.y1 + env->fra.y *
+		((env->fra.y2 - env->fra.y1) / HEIGHT);
 	env->fra.z_r = 0;
 	env->fra.z_i = 0;
 	i = -1;
