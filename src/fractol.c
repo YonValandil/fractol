@@ -103,37 +103,3 @@ void	tricorn(t_env *env, double i, double tmp)
 		put_pixel_img(env, set_pixel(env->fra.x, env->fra.y,
 			i * 255 / env->fra.deep));
 }
-
-void	barnsley(t_env *env)
-{
-	float		rnd;
-	t_coords	c;
-
-	while (env->fra.deep--)
-	{
-		rnd = (float)rand() / RAND_MAX;
-		if (rnd <= 0.01)
-		{
-			env->fra.x2 = 0;
-			env->fra.y2 = 0.16 * env->fra.y2;
-		}
-		else if (rnd <= 0.06)
-		{
-			env->fra.x2 = -0.15 * env->fra.x2 + 0.28 * env->fra.y2;
-			env->fra.y2 = 0.26 * env->fra.x2 + 0.24 * env->fra.y2 + 0.44;
-		}
-		else if (rnd <= 0.14)
-		{
-			env->fra.x2 = 0.2 * env->fra.x2 + -0.26 * env->fra.y2;
-			env->fra.y2 = 0.23 * env->fra.x2 + 0.22 * env->fra.y2 + 1.6;
-		}
-		else
-		{
-			env->fra.x2 = 0.85 * env->fra.x2 + 0.04 * env->fra.y2;
-			env->fra.y2 = -0.04 * env->fra.x2 + 0.85 * env->fra.y2 + 1.6;
-		}
-		c.x = (env->fra.x2 + 3) * 70;
-		c.y = 800 - env->fra.y2 * 70;
-		put_pixel_img(env, set_pixel(c.x + 200, c.y - 100, GREEN));
-	}
-}

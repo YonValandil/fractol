@@ -11,7 +11,7 @@ MLX = 		-I ./minilibx_macos -L ./minilibx_macos -lmlx -framework OpenGL -framewo
 HEADER =	./include/
 CFLAGS =	-Wall -Werror -Wextra -g -O3
 ARFLAGS =	-rcs
-CFILES =	main init event fractol
+CFILES =	main init event fractol barnsley
 
 SRCS =		$(CFILES:%=$(SRCS_DIR)%.c)
 OBJS =		$(SRCS:%.c=$(OBJS_DIR)%.o)
