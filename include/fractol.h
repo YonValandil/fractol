@@ -16,7 +16,7 @@
 # include "../minilibx_macos/mlx.h"
 # include "libft.h"
 # include <math.h>
-# include <stdio.h> //
+# include <stdio.h>
 # include <time.h>
 
 # define BLANK			0x00FFFFFF
@@ -80,12 +80,12 @@ typedef struct			s_img
 	int					endian;
 	void				*ptr;
 	char				*data;
-}           	        t_img;
+}						t_img;
 
 typedef struct			s_win
 {
-    int         	    l;
-    int         	    h;
+	int					l;
+	int					h;
 	void				*ptr;
 	char				*title;
 }						t_win;
@@ -93,29 +93,29 @@ typedef struct			s_win
 typedef struct			s_env
 {
 	void				*mlx;
-	int				tmp_x;
-	int				tmp_y;
+	int					tmp_x;
+	int					tmp_y;
 	struct s_img		img;
-    struct s_win		win;
+	struct s_win		win;
 	struct s_fractal	fra;
-}                   	t_env;
+}						t_env;
 
-void 		exit_error(const char *s);
-void		set_env(t_env *env);
-void 		set_img(t_env *env);
-void 		set_string(t_env *env);
-void 		init_fractals(t_env *env);
-void		fractals(t_env *env);
-void		julia(t_env *env, double, double);
-void		tricorn(t_env *env, double, double);
-void		mandelbrot(t_env *env, double, double);
-void		barnsley(t_env *env);
-void		put_pixel_img(t_env *env, t_coords p);
-t_coords 	set_pixel(int x, int y, int color);
-int			controller(int keycode, void *param);
-int 		mouse_pos(int x, int y, t_env *env);
-void 		calcul_zoom(t_env *env, int x, int y);
-int 		mouse_zoom(int keycode, int x, int y, t_env *env);
-void 		reset(t_env *env);
+void					exit_error(const char *s);
+void					set_env(t_env *env);
+void					set_img(t_env *env);
+void					set_string(t_env *env);
+void					init_fractals(t_env *env);
+void					fractals(t_env *env);
+void					julia(t_env *env, double i, double tmp);
+void					tricorn(t_env *env, double i, double tmp);
+void					mandelbrot(t_env *env, double i, double tmp);
+void					barnsley(t_env *env);
+void					put_pixel_img(t_env *env, t_coords p);
+t_coords				set_pixel(int x, int y, int color);
+int						controller(int keycode, void *param);
+int						mouse_pos(int x, int y, t_env *env);
+void					calcul_zoom(t_env *env, int x, int y);
+int						mouse_zoom(int keycode, int x, int y, t_env *env);
+void					reset(t_env *env);
 
 #endif
